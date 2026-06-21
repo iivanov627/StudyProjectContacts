@@ -1,0 +1,19 @@
+package ru.ksergey.StudyProjectWebStart.dao;
+
+import ru.ksergey.StudyProjectWebStart.model.entity.Contact;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ContactRepository {
+    List<Contact> findAll();
+
+    Optional<Contact> findById(int id);
+
+    Contact save(Contact contact);
+
+    boolean deleteById(int id);
+
+    Optional<Contact> findByEmail(String email);
+    Optional<Contact> findByTelephone(String telephone);
+}
