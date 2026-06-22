@@ -4,11 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ksergey.StudyProjectWebStart.dao.ContactOwnerRepository;
+import ru.ksergey.StudyProjectWebStart.dao.JpaContactOwnerRepository;
 import ru.ksergey.StudyProjectWebStart.exception.handler.customException.EntityNotFoundException;
 import ru.ksergey.StudyProjectWebStart.exception.handler.customException.ValidationException;
 import ru.ksergey.StudyProjectWebStart.model.dto.CreateContactOwnerDto;
 import ru.ksergey.StudyProjectWebStart.model.dto.UpdateContactOwnerDto;
 import ru.ksergey.StudyProjectWebStart.model.entity.ContactOwner;
+import ru.ksergey.StudyProjectWebStart.model.enums.AppRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class ContactOwnerServiceImpl implements ContactOwnerService{
                 });
 
         ContactOwner contactOwner = modelMapper.map(createDto, ContactOwner.class);
+        contactOwner.setRole(AppRole.USER);
         return contactOwnerRepository.save(contactOwner);
     }
 
@@ -82,6 +85,7 @@ public class ContactOwnerServiceImpl implements ContactOwnerService{
 
         ContactOwner updateOwner = modelMapper.map(updateDto, ContactOwner.class);
         updateOwner.setRole(contactOwner.getRole());
+        updateOwner.setPassword(contactOwner.getPassword());
         return contactOwnerRepository.save(updateOwner);
     }
 

@@ -2,6 +2,7 @@ package ru.ksergey.StudyProjectWebStart.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,20 +13,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-
+@Entity
+@Table(name = "Contact_owners")
 @Setter
 @Getter
 public class ContactOwner {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String username;
     private String description;
     private String email;
     @JsonIgnore
     private String password;
+    @Enumerated(EnumType.STRING)
     private AppRole role;
 
-    private List<Contact> contacts = new ArrayList<>();
+//    @OneToMany
+//    private List<Contact> contacts = new ArrayList<>();
 
     public ContactOwner() {
     }
@@ -46,12 +52,11 @@ public class ContactOwner {
                 && Objects.equals(description, that.description)
                 && Objects.equals(email, that.email)
                 && Objects.equals(password, that.password)
-                && role == that.role
-                && Objects.equals(contacts, that.contacts);
+                && role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, description, email, password, role, contacts);
+        return Objects.hash(id, username, description, email, password, role);
     }
 }

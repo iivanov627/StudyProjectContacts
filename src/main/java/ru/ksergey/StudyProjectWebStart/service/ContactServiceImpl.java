@@ -1,5 +1,6 @@
 package ru.ksergey.StudyProjectWebStart.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import ru.ksergey.StudyProjectWebStart.model.entity.Contact;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class ContactServiceImpl implements ContactService{
     private final ContactRepository contactRepository;
@@ -25,6 +27,7 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public List<Contact> getAllContacts() {
+        log.info("    >> HEY HEY");
         return contactRepository.findAll();
     }
 

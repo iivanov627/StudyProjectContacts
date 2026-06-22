@@ -1,17 +1,22 @@
 package ru.ksergey.StudyProjectWebStart.model.entity;
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
 import java.util.UUID;
 
-
+@Entity
+@Table(name = "contacts")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Contact {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @Column(name = "id")
     private int id;
     private String telephone;
     private String firstName;

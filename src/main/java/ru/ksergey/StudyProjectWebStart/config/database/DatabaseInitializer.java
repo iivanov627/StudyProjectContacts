@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.sql.*;
 import java.util.UUID;
 
-@Component
+//@Component
 public class DatabaseInitializer {
     private final String dbPath;
 

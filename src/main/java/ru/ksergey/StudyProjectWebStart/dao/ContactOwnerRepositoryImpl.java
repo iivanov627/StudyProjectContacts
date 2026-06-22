@@ -26,7 +26,6 @@ public class ContactOwnerRepositoryImpl implements ContactOwnerRepository{
                     .password(8,50,true,false,true));
             owner.setDescription(faker.lorem().sentence(10));
             owner.setRole(AppRole.USER);
-            owner.setContacts(new ArrayList<>());
             contactOwners.add(owner);
         });
     }
