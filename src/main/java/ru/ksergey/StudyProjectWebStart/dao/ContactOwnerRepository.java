@@ -5,18 +5,17 @@ import ru.ksergey.StudyProjectWebStart.model.entity.ContactOwner;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface ContactOwnerRepository {
     List<ContactOwner> findAll();
 
-    Optional<ContactOwner> findById(UUID id);
+    Optional<ContactOwner> findById(String id);
 
     Optional<ContactOwner> findByEmail(String email);
 
     ContactOwner save(ContactOwner contactOwner);
 
-    boolean deleteById(UUID id);
+    boolean deleteById(String id);
 
     List<ContactOwner> findByUsername(String username);
 

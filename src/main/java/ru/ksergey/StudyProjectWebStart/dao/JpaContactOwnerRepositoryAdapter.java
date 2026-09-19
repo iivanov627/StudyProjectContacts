@@ -1,14 +1,11 @@
 package ru.ksergey.StudyProjectWebStart.dao;
 
 import lombok.experimental.Delegate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import ru.ksergey.StudyProjectWebStart.model.entity.ContactOwner;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Primary
 @Repository
@@ -28,7 +25,7 @@ public class JpaContactOwnerRepositoryAdapter implements ContactOwnerRepository{
     }
 
     @Override
-    public boolean deleteById(UUID id){
+    public boolean deleteById(String id){
         if (jpaContactOwnerRepository.existsById(id)){
             jpaContactOwnerRepository.deleteById(id);
             return !jpaContactOwnerRepository.existsById(id);

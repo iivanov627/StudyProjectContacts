@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface JpaContactOwnerRepository extends JpaRepository<ContactOwner, UUID> {
+public interface JpaContactOwnerRepository extends JpaRepository<ContactOwner, String> {
     Optional<ContactOwner> findByEmail(String email);
     List<ContactOwner> findByUsername(String username);
 

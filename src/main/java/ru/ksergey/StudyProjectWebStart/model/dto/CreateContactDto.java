@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,4 +22,9 @@ public class CreateContactDto {
     private String telephone;
     @Email(message = "Неккоректный email")
     private String email;
+
+    private ContactDetailDto contactDetail;
+
+    @NotNull(message = "ID владельца не может быть пустым")
+    private String ownerId;
 }

@@ -37,7 +37,7 @@ public class ContactOwnerController {
 
     @GetMapping("get/{id}")
     public ResponseEntity<ServerResponse<ContactOwner>> getContactOwnerById(
-            @PathVariable UUID id
+            @PathVariable String id
     ){
 
         return ServerResponseHelper.ok(contactOwnerService.getContactOwnerById(id));
@@ -67,7 +67,7 @@ public class ContactOwnerController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ServerResponse<Void>> deleteContactOwnerById(
-            @PathVariable UUID id
+            @PathVariable String id
     ) {
         contactOwnerService.deleteContactOwner(id);
         return ServerResponseHelper.ok(null);

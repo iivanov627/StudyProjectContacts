@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdateContactOwnerDto {
     @NotNull
-    private UUID id;
+    private String id;
 
     @NotBlank(message = "username required")
     @Size(min = 6, max = 50, message = "username size 6-50")

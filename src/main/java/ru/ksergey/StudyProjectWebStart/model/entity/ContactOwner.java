@@ -21,7 +21,7 @@ public class ContactOwner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     private String username;
     private String description;
     private String email;
@@ -30,8 +30,12 @@ public class ContactOwner {
     @Enumerated(EnumType.STRING)
     private AppRole role;
 
-//    @OneToMany
-//    private List<Contact> contacts = new ArrayList<>();
+    @OneToMany (
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Contact> contacts = new ArrayList<>();
 
     public ContactOwner() {
     }

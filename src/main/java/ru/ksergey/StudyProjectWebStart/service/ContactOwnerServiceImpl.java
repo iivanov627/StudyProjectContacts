@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ksergey.StudyProjectWebStart.dao.ContactOwnerRepository;
-import ru.ksergey.StudyProjectWebStart.dao.JpaContactOwnerRepository;
 import ru.ksergey.StudyProjectWebStart.exception.handler.customException.EntityNotFoundException;
 import ru.ksergey.StudyProjectWebStart.exception.handler.customException.ValidationException;
 import ru.ksergey.StudyProjectWebStart.model.dto.CreateContactOwnerDto;
@@ -12,10 +11,7 @@ import ru.ksergey.StudyProjectWebStart.model.dto.UpdateContactOwnerDto;
 import ru.ksergey.StudyProjectWebStart.model.entity.ContactOwner;
 import ru.ksergey.StudyProjectWebStart.model.enums.AppRole;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 
 @Service
@@ -37,7 +33,7 @@ public class ContactOwnerServiceImpl implements ContactOwnerService{
     }
 
     @Override
-    public ContactOwner getContactOwnerById(UUID id) {
+    public ContactOwner getContactOwnerById(String id) {
         return contactOwnerRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("Такой владелец контакта не существует"));
     }
@@ -63,7 +59,6 @@ public class ContactOwnerServiceImpl implements ContactOwnerService{
 
     @Override
     public ContactOwner updateContactOwner(UpdateContactOwnerDto updateDto) {
-
         ContactOwner contactOwner = contactOwnerRepository.findById(updateDto.getId())
                         .orElseThrow(()->new EntityNotFoundException("Такой владелец контакта не существует"));
 
@@ -83,14 +78,12 @@ public class ContactOwnerServiceImpl implements ContactOwnerService{
                     }
                 });
 
-        ContactOwner updateOwner = modelMapper.map(updateDto, ContactOwner.class);
-        updateOwner.setRole(contactOwner.getRole());
-        updateOwner.setPassword(contactOwner.getPassword());
-        return contactOwnerRepository.save(updateOwner);
+        modelMapper.map(updateDto, contactOwner);
+        return contactOwnerRepository.save(contactOwner);
     }
 
     @Override
-    public boolean deleteContactOwner(UUID id) {
+    public boolean deleteContactOwner(String id) {
         if (contactOwnerRepository.findById(id).isEmpty()){
             throw new EntityNotFoundException("Указанный id не существует");
         }

@@ -1,6 +1,7 @@
 package ru.ksergey.StudyProjectWebStart.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,20 @@ public class Contact {
     private String firstName;
     private String lastName;
     private String email;
+
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private ContactOwner owner;
+
+    @OneToOne(
+            mappedBy = "contact",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private ContactDetail contactDetail;
+
 
     @Override
     public boolean equals(Object o) {
